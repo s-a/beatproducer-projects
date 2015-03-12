@@ -1,4 +1,4 @@
-[![logo](/src/logo_small.png)](https://s-a.github.io/beatproducer/studio/)  
+[![logo](logo_small.png)](https://s-a.github.io/beatproducer/studio/)  
 
 
 [![Build Status](http://img.shields.io/travis/s-a/beatproducer-projects.svg?style=flat-square)](https://travis-ci.org/s-a/beatproducer-projects)
