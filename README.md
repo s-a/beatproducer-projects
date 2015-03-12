@@ -10,5 +10,6 @@ This is the famous project channel of [beatproducer](https://github.com/s-a/beat
 Beatproducer is a beat producer environment for browsers available at https://s-a.github.io/beatproducer/studio/.  
 
 Do not change this repository manually. It is managed by the beatproducer studio.  
+As a fork it stores you personal beatproducer projects.  
 
 Cheers!
