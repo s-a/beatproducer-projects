@@ -27,7 +27,7 @@ describe("validation", function() {
 	it("should contain only valid project .json files", function() {
 		for (var i = 0; i < files.length; i++) {
 			var file = files[i];
-			require(file).author.length.should.be.above(0);
+			require(file).bpm.should.be.above(0);
 		}
 	});
 });
