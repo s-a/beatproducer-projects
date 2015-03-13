@@ -1,1 +1,89 @@
-{"foo":"bar2222","test":"1426227739385"}
+{
+ "name": "The dawn of a souled hip hop rhythm.",
+ "bpm": 80,
+ "devices": [
+  {
+   "sample": "beatproducer-drum-loops-pack-1/bpnet_european_hip_hop_beat_090bpm.wav",
+   "slices": [
+    0,
+    0.67,
+    1,
+    10.67
+   ],
+   "patterns": [
+    {
+     "id": 1,
+     "bars": 1,
+     "sequence": [
+      [
+       1
+      ],
+      [
+       1
+      ],
+      [
+       2
+      ],
+      [],
+      [
+       1
+      ],
+      [
+       1
+      ],
+      [
+       2
+      ],
+      []
+     ]
+    },
+    {
+     "id": 2,
+     "bars": 2,
+     "sequence": [
+      [
+       2,
+       1
+      ],
+      [],
+      [
+       2,
+       1
+      ],
+      [],
+      [
+       2,
+       1
+      ],
+      [],
+      [
+       2,
+       1
+      ],
+      [],
+      [
+       2,
+       1
+      ],
+      [],
+      [
+       2,
+       1
+      ],
+      [],
+      [
+       2,
+       1
+      ],
+      [],
+      [
+       2,
+       1
+      ],
+      []
+     ]
+    }
+   ]
+  }
+ ]
+}
