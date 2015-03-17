@@ -3,11 +3,11 @@ var path = require("path");
 var https = require('https');
 var should = require("should");
 var shell = require('shelljs');
-
-var getRepoFiles = function (done) {
+// https://api.github.com/search/users?q=[stephan.ahlf@googlemail.com,agent.smith.26@gmail.com]
+var githubRequest = function (path, done) {
 	var options = {
 	  host: 'api.github.com',
-	  path: "/repos/s-a/beatproducer-projects/contents/projects",
+	  path: path,
 	  method: 'GET',
       headers: {'user-agent': 'node.js'}
 	};
@@ -38,9 +38,7 @@ function getFiles (dir, files_){
         if (fs.statSync(name).isDirectory()){
             getFiles(name, files_);
         } else {
- //       	if (path.extname(name).toLowerCase() === ".json" ){
-        		files_.push(name);
-//        	}
+    		files_.push(name);
         }
     }
     return files_;
@@ -53,16 +51,15 @@ function getFileOwner(filename){
 }
 
 var files = getFiles(path.join(__dirname, "..", "projects"));
-var giturl,currentGitHubUser;
+var commitUsername, commitEmail;
 
-before(function  () {
-	/*var s = shell.exec("git remote -v");
-	giturl = s.output.split("\n")[0].split("(fetch)")[0].split("origin")[1].trim();
-	console.log("remote:", giturl);
-	currentGitHubUser = giturl.replace("https://github.com/", "").split("/")[0];
-	console.log("user:", currentGitHubUser);
-	*/
-	f = shell.exec('git log --pretty="%an" | sort | uniq');
+before(function  (done) {
+	commitEmail = shell.exec('git log -n 1 --pretty="%ae"',  {silent:true}).output.trim();
+
+	githubRequest("/search/users?q=" + commitEmail, function(contents) {
+		commitUsername = contents.items[0].login;
+		done();
+	});
 });
 
 describe("validation", function() {
@@ -82,24 +79,27 @@ describe("validation", function() {
 			require(file).bpm.should.be.above(0);
 		}
 	});
-/*
-	it("should got git repo infos", function() {
-		currentGitHubUser.length.should.be.above(1);
+
+	it("should got git commit user email", function() {
+		commitEmail.length.should.be.above(1);
 	});
-*/
-	it("should not delete files from other users", function(done) {
-		getRepoFiles(function(contents) {
+
+	it("should resolve commit user email to git username", function() {
+		commitUsername.length.should.be.above(1);
+	});
+
+	it("should not delete files from other users", function() {
+		githubRequest("/repos/s-a/beatproducer-projects/contents/projects", function(contents) {
 			for (var i = 0; i < contents.length; i++) {
 				var file = contents[i];
 				var fn = "./" + file.path;
 
 				fs.existsSync( fn ).should.be.true;
-				/*if ( !fs.existsSync( fn ) && currentGitHubUser !== "s-a"){
+				if ( !fs.existsSync( fn ) && commitUsername !== "s-a"){
 					console.warn("checking deleted file", fn);
-					getFileOwner(file.name).should.be.equal(currentGitHubUser);
-				}*/
+					getFileOwner(file.name).should.be.equal(commitUsername);
+				}
 			}
-			done();
 		});
 	});
 
