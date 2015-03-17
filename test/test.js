@@ -61,7 +61,8 @@ before(function  () {
 	console.log("remote:", giturl);
 	currentGitHubUser = giturl.replace("https://github.com/", "").split("/")[0];
 	console.log("user:", currentGitHubUser);
-	f = shell.exec('git log --format="%an %ae" | sort | uniq');*/
+	*/
+	f = shell.exec('git log --pretty="%an" | sort | uniq');
 });
 
 describe("validation", function() {
