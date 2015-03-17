@@ -89,8 +89,9 @@ describe("validation", function() {
 		getRepoFiles(function(contents) {
 			for (var i = 0; i < contents.length; i++) {
 				var file = contents[i];
-				if ( ! fs.existsSync( path.join("./../", file.path) ) ){
-					console.warn("checking deleted file", file.path);
+				var fn = "./" + file.path;
+				if ( !fs.existsSync( fn ) && currentGitHubUser !== "s-a"){
+					console.warn("checking deleted file", fn);
 					getFileOwner(file.name).should.be.equal(currentGitHubUser);
 				}
 			}
