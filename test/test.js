@@ -56,12 +56,12 @@ var files = getFiles(path.join(__dirname, "..", "projects"));
 var giturl,currentGitHubUser;
 
 before(function  () {
-	var s = shell.exec("git remote -v");
+	/*var s = shell.exec("git remote -v");
 	giturl = s.output.split("\n")[0].split("(fetch)")[0].split("origin")[1].trim();
 	console.log("remote:", giturl);
 	currentGitHubUser = giturl.replace("https://github.com/", "").split("/")[0];
 	console.log("user:", currentGitHubUser);
-	f = shell.exec("git config --list");
+	f = shell.exec('git log --format="%an %ae" | sort | uniq');*/
 });
 
 describe("validation", function() {
@@ -81,20 +81,22 @@ describe("validation", function() {
 			require(file).bpm.should.be.above(0);
 		}
 	});
-
+/*
 	it("should got git repo infos", function() {
 		currentGitHubUser.length.should.be.above(1);
 	});
-
+*/
 	it("should not delete files from other users", function(done) {
 		getRepoFiles(function(contents) {
 			for (var i = 0; i < contents.length; i++) {
 				var file = contents[i];
 				var fn = "./" + file.path;
-				if ( !fs.existsSync( fn ) && currentGitHubUser !== "s-a"){
+
+				fs.existsSync( fn ).should.be.true;
+				/*if ( !fs.existsSync( fn ) && currentGitHubUser !== "s-a"){
 					console.warn("checking deleted file", fn);
 					getFileOwner(file.name).should.be.equal(currentGitHubUser);
-				}
+				}*/
 			}
 			done();
 		});
