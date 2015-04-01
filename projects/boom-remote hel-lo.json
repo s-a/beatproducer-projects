@@ -3,6 +3,7 @@
  "bpm": 80,
  "devices": [
   {
+   "name": "asdasd",
    "sample": "beatproducer-drum-loops-pack-1/bpnet_european_hip_hop_beat_090bpm.wav",
    "slices": [
     0,
@@ -84,6 +85,20 @@
      ]
     }
    ]
+  },
+  {
+   "name": "asd",
+   "sample": "beatproducer-drum-loops-pack-1/bpnet_another-day-in-paradise_095bpm_4bars.wav",
+   "slices": [
+    0.7881089445991952,
+    3.90301572563411,
+    7.0554515040308905,
+    8.575375897186483,
+    10.545648258684471,
+    12.515920620182458,
+    17.863802744248424
+   ],
+   "patterns": []
   }
  ]
 }
